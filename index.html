@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Group Finder</title>
+<style>
+*{box-sizing:border-box;font-family:Inter,Arial,sans-serif}
+body{
+margin:0;
+background:linear-gradient(135deg,#0f172a,#1d4ed8);
+min-height:100vh;
+display:flex;
+justify-content:center;
+padding:24px;
+color:#fff;
+}
+.card{
+width:100%;
+max-width:900px;
+background:rgba(255,255,255,.1);
+backdrop-filter:blur(18px);
+border-radius:22px;
+padding:24px;
+box-shadow:0 20px 50px rgba(0,0,0,.25);
+}
+h1{margin:0 0 6px;font-size:2rem}
+.sub{opacity:.8;margin-bottom:20px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:768px){.grid{grid-template-columns:1fr}}
+.box{background:#fff;color:#111;padding:18px;border-radius:18px}
+input{
+width:100%;padding:14px 16px;border-radius:12px;border:1px solid #ddd;
+font-size:15px;margin-bottom:14px;
+}
+.results{display:flex;flex-wrap:wrap;gap:8px;min-height:36px}
+.tag{
+background:#e0ecff;color:#0f3ea8;padding:8px 12px;border-radius:999px;
+animation:fade .25s ease;
+}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+#loading{
+position:fixed;inset:0;background:rgba(7,15,30,.92);
+display:flex;align-items:center;justify-content:center;z-index:999;
+}
+.loader{
+text-align:center;color:#fff
+}
+.spin{
+width:70px;height:70px;border-radius:50%;
+border:7px solid rgba(255,255,255,.15);
+border-top-color:#4ea1ff;
+margin:auto auto 20px;
+animation:rot 1s linear infinite;
+}
+@keyframes rot{to{transform:rotate(360deg)}}
+.bar{
+width:260px;height:8px;background:#24324e;border-radius:20px;overflow:hidden;margin:15px auto
+}
+.bar span{
+display:block;height:100%;width:40%;background:#4ea1ff;animation:move 1.2s infinite
+}
+@keyframes move{from{margin-left:-40%}to{margin-left:100%}}
+small{display:block;margin-top:10px;opacity:.75}
+</style>
+</head>
+<body>
+<div id="loading">
+<div class="loader">
+<div class="spin"></div>
+<h2>Memuat Data Grup...</h2>
+<div class="bar"><span></span></div>
+<small>Mohon tunggu sebentar</small>
+</div>
+</div>
+
+<div class="card">
+<h1>📦 Group Finder</h1>
+<div class="sub">Cari produk atau grup dengan cepat</div>
+
+<div class="grid">
+<div class="box">
+<h3>Cari Nama Produk</h3>
+<input id="produk" placeholder="Ketik nama produk...">
+<div id="hasilProduk" class="results"></div>
+</div>
+
+<div class="box">
+<h3>Cari Nama Grup</h3>
+<input id="grup" placeholder="Ketik nama grup...">
+<div id="hasilGrup" class="results"></div>
+</div>
+</div>
+</div>
+
+<script>
+const API="https://script.google.com/macros/s/AKfycbyYIrkYqMlcmAAZQaX5Ar48jrhxCZ0PsGF_Abwmxx1CByF7dnTtIfDMt5WG30r5-Zh2YA/exec";
+let DATA=[];
+
+async function loadData(){
+ const cache=localStorage.getItem("groupFinderCache");
+ if(cache){
+   DATA=JSON.parse(cache);
+   document.getElementById("loading").style.display="none";
+   refreshBackground();
+ }
+ try{
+   const r=await fetch(API+"?action=data");
+   const j=await r.json();
+   DATA=j.data||[];
+   localStorage.setItem("groupFinderCache",JSON.stringify(DATA));
+ }catch(e){
+   console.error(e);
+ }
+ document.getElementById("loading").style.display="none";
+}
+function refreshBackground(){}
+
+function tags(el,arr){
+ el.innerHTML="";
+ if(arr.length===0){el.innerHTML="<i>Tidak ada data</i>";return;}
+ arr.forEach(v=>{
+   const d=document.createElement("div");
+   d.className="tag";
+   d.textContent=v;
+   el.appendChild(d);
+ });
+}
+produk.oninput=e=>{
+ const k=e.target.value.toLowerCase().trim();
+ if(!k){hasilProduk.innerHTML="";return;}
+ const out=[...new Set(DATA.filter(x=>x.produk.toLowerCase().includes(k)).map(x=>x.grup))];
+ tags(hasilProduk,out);
+}
+grup.oninput=e=>{
+ const k=e.target.value.toLowerCase().trim();
+ if(!k){hasilGrup.innerHTML="";return;}
+ const out=[...new Set(DATA.filter(x=>x.grup.toLowerCase().includes(k)).map(x=>x.produk))];
+ tags(hasilGrup,out);
+}
+loadData();
+</script>
+</body>
+</html>
