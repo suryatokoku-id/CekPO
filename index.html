@@ -2,95 +2,409 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Group Finder</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Cek Daftar Produk Suryatokoku ⚡</title>
+<!-- Google Fonts: Plus Jakarta Sans untuk vibe modern ultra-sleek -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;font-family:Inter,Arial,sans-serif}
-body{
-margin:0;
-background:linear-gradient(135deg,#0f172a,#1d4ed8);
-min-height:100vh;
-display:flex;
-justify-content:center;
-padding:24px;
-color:#fff;
+:root {
+  --bg-dark: #090a0f;
+  --accent-purple: #8b5cf6;
+  --accent-cyan: #06b6d4;
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-focus: rgba(139, 92, 246, 0.2);
 }
-.card{
-width:100%;
-max-width:900px;
-background:rgba(255,255,255,.1);
-backdrop-filter:blur(18px);
-border-radius:22px;
-padding:24px;
-box-shadow:0 20px 50px rgba(0,0,0,.25);
+
+* {
+  box-sizing: border-box;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-tap-highlight-color: transparent;
 }
-h1{margin:0 0 6px;font-size:2rem}
-.sub{opacity:.8;margin-bottom:20px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-@media(max-width:768px){.grid{grid-template-columns:1fr}}
-.box{background:#fff;color:#111;padding:18px;border-radius:18px}
-input{
-width:100%;padding:14px 16px;border-radius:12px;border:1px solid #ddd;
-font-size:15px;margin-bottom:14px;
+
+body {
+  margin: 0;
+  background-color: var(--bg-dark);
+  /* Background glow efek nebula futuristik */
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(6, 118, 212, 0.15) 0%, transparent 40%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 16px;
+  color: #f3f4f6;
+  overflow-x: hidden;
 }
-.results{display:flex;flex-wrap:wrap;gap:8px;min-height:36px}
-.tag{
-background:#e0ecff;color:#0f3ea8;padding:8px 12px;border-radius:999px;
-animation:fade .25s ease;
+
+/* Scrollbar kustom estetika cyber */
+::-webkit-scrollbar {
+  width: 6px;
 }
-@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-#loading{
-position:fixed;inset:0;background:rgba(7,15,30,.92);
-display:flex;align-items:center;justify-content:center;z-index:999;
+::-webkit-scrollbar-track {
+  background: transparent;
 }
-.loader{
-text-align:center;color:#fff
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 99px;
 }
-.spin{
-width:70px;height:70px;border-radius:50%;
-border:7px solid rgba(255,255,255,.15);
-border-top-color:#4ea1ff;
-margin:auto auto 20px;
-animation:rot 1s linear infinite;
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-purple);
 }
-@keyframes rot{to{transform:rotate(360deg)}}
-.bar{
-width:260px;height:8px;background:#24324e;border-radius:20px;overflow:hidden;margin:15px auto
+
+.card {
+  width: 100%;
+  max-width: 680px;
+  background: rgba(15, 17, 26, 0.7);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--glass-border);
+  border-radius: 28px;
+  padding: 24px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+  margin-top: 10px;
+  margin-bottom: 40px;
+  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.bar span{
-display:block;height:100%;width:40%;background:#4ea1ff;animation:move 1.2s infinite
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
-@keyframes move{from{margin-left:-40%}to{margin-left:100%}}
-small{display:block;margin-top:10px;opacity:.75}
+
+/* Header Estetika Gen-Z */
+.header-zone {
+  text-align: center;
+  margin-bottom: 28px;
+  position: relative;
+}
+.badge-glow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(90deg, rgba(139, 92, 246, 0.15), rgba(6, 182, 212, 0.15));
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  padding: 6px 14px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #c084fc;
+  margin-bottom: 12px;
+}
+h1 {
+  margin: 0;
+  font-size: 2.25rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  background: linear-gradient(135deg, #ffffff 30%, #a5b4fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.sub {
+  font-size: 0.95rem;
+  opacity: 0.6;
+  margin-top: 6px;
+}
+
+/* Layout Bento Grid (1 Column di Mobile, Gaps rapi) */
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.box {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  padding: 20px;
+  border-radius: 22px;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.box:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+h3 {
+  margin: 0 0 14px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.icon-tag-purple { color: var(--accent-purple); }
+.icon-tag-cyan { color: var(--accent-cyan); }
+
+.input-wrapper {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+input {
+  width: 100%;
+  padding: 16px 44px 16px 18px; /* Extra right padding untuk clear button */
+  border-radius: 16px;
+  border: 1.5px solid var(--glass-border);
+  background: rgba(0, 0, 0, 0.2);
+  font-size: 16px; /* Mencegah auto-zoom di browser Safari iOS */
+  color: #fff;
+  outline: none;
+  transition: all 0.25s ease;
+}
+input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+input:focus {
+  border-color: var(--accent-purple);
+  background: rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 20px var(--glass-focus);
+}
+
+/* Clear button di dalam input */
+.clear-btn {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  font-size: 11px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.clear-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+/* Drop-down rekomendasi melayang yang mewah */
+.suggestions-list {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: #0f111a;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  max-height: 240px;
+  overflow-y: auto;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
+  z-index: 50;
+  display: none;
+  animation: fadeIn 0.2s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.suggestion-item {
+  padding: 14px 18px;
+  cursor: pointer;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  transition: all 0.2s;
+  text-align: left;
+}
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+.suggestion-item:hover {
+  background: linear-gradient(90deg, rgba(139, 92, 246, 0.15), transparent);
+  color: #fff;
+  padding-left: 22px; /* Geser sedikit saat dihover untuk feel interaktif */
+}
+
+.results-header {
+  font-size: 11px;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.results {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 48px;
+}
+
+.empty-state {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.35);
+  font-style: italic;
+  width: 100%;
+  padding: 8px 0;
+}
+
+/* Tag Pil yang estetik dan bouncy */
+.tag {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(139, 92, 246, 0.05));
+  color: #d8b4fe;
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  padding: 10px 16px;
+  border-radius: 14px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+  animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.tag:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.2);
+  border-color: #c084fc;
+}
+.tag:active {
+  transform: scale(0.97);
+}
+
+/* Warna tag alternatif untuk sisi Grup */
+.box:nth-child(2) .tag {
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.12), rgba(6, 182, 212, 0.05));
+  color: #67e8f9;
+  border: 1px solid rgba(6, 182, 212, 0.25);
+}
+.box:nth-child(2) .tag:hover {
+  border-color: #22d3ee;
+  box-shadow: 0 4px 15px rgba(6, 182, 212, 0.2);
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.7); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Loader Estetika Cyberpunk / Hologram */
+#loading {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 7, 13, 0.96);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+.loader {
+  text-align: center;
+  color: #fff;
+  padding: 20px;
+}
+.spin {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 4px solid rgba(139, 92, 246, 0.1);
+  border-top-color: var(--accent-purple);
+  border-bottom-color: var(--accent-cyan);
+  margin: auto auto 24px;
+  animation: rot 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+@keyframes rot {
+  to { transform: rotate(360deg); }
+}
+.loader h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin: 0;
+}
+.bar {
+  width: 220px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 16px auto;
+}
+.bar span {
+  display: block;
+  height: 100%;
+  width: 50%;
+  background: linear-gradient(90deg, var(--accent-purple), var(--accent-cyan));
+  animation: move 1.5s infinite ease-in-out;
+}
+@keyframes move {
+  0% { margin-left: -50%; }
+  100% { margin-left: 100%; }
+}
+small {
+  display: block;
+  margin-top: 8px;
+  opacity: 0.5;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+}
 </style>
 </head>
 <body>
 <div id="loading">
-<div class="loader">
-<div class="spin"></div>
-<h2>Memuat Data Grup...</h2>
-<div class="bar"><span></span></div>
-<small>Mohon tunggu sebentar</small>
-</div>
+  <div class="loader">
+    <div class="spin"></div>
+    <h2>FETCHING DATA GRUP...</h2>
+    <div class="bar"><span></span></div>
+    <small>MEMUAT DATABASE SERVER</small>
+  </div>
 </div>
 
 <div class="card">
-<h1>📦 Group Finder</h1>
-<div class="sub">Cari produk atau grup dengan cepat</div>
+  <!-- HEADER ZONE -->
+  <div class="header-zone">
+    <div class="badge-glow">⚡ Suryatokoku</div>
+    <h1>Cek Daftar Produk</h1>
+    <div class="sub">Hubungkan barang belanjaan & PO drops secara real-time</div>
+  </div>
 
-<div class="grid">
-<div class="box">
-<h3>Cari Nama Produk</h3>
-<input id="produk" placeholder="Ketik nama produk...">
-<div id="hasilProduk" class="results"></div>
-</div>
+  <div class="grid">
+    <!-- KOTAK CARI PRODUK -->
+    <div class="box">
+      <h3><span class="icon-tag-purple">✦</span> 1. Pilih Produk Kamu</h3>
+      <div class="input-wrapper">
+        <input id="produk" placeholder="Ketik nama produk..." autocomplete="off">
+        <button id="clearProduk" class="clear-btn">✕</button>
+        <div id="suggestProduk" class="suggestions-list"></div>
+      </div>
+      <div class="results-header">Grup Terkait Produk:</div>
+      <div id="hasilProduk" class="results">
+        <div class="empty-state">✨ Menunggumu memilih produk...</div>
+      </div>
+    </div>
 
-<div class="box">
-<h3>Cari Nama Grup</h3>
-<input id="grup" placeholder="Ketik nama grup...">
-<div id="hasilGrup" class="results"></div>
-</div>
-</div>
+    <!-- KOTAK CARI GRUP -->
+    <div class="box">
+      <h3><span class="icon-tag-cyan">✧</span> 2. Pilih Nama Grup</h3>
+      <div class="input-wrapper">
+        <input id="grup" placeholder="Ketik nama grup..." autocomplete="off">
+        <button id="clearGrup" class="clear-btn">✕</button>
+        <div id="suggestGrup" class="suggestions-list"></div>
+      </div>
+      <div class="results-header">Produk di dalam Grup:</div>
+      <div id="hasilGrup" class="results">
+        <div class="empty-state">✨ Menunggumu memilih grup...</div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -116,9 +430,13 @@ async function loadData(){
 }
 function refreshBackground(){}
 
+// Fungsi merender tag dengan visualisasi menarik
 function tags(el,arr){
  el.innerHTML="";
- if(arr.length===0){el.innerHTML="<i>Tidak ada data</i>";return;}
+ if(arr.length===0){
+   el.innerHTML=`<div class="empty-state">😿 Gak nemu data nih...</div>`;
+   return;
+ }
  arr.forEach(v=>{
    const d=document.createElement("div");
    d.className="tag";
@@ -126,18 +444,123 @@ function tags(el,arr){
    el.appendChild(d);
  });
 }
-produk.oninput=e=>{
- const k=e.target.value.toLowerCase().trim();
- if(!k){hasilProduk.innerHTML="";return;}
- const out=[...new Set(DATA.filter(x=>x.produk.toLowerCase().includes(k)).map(x=>x.grup))];
- tags(hasilProduk,out);
-}
-grup.oninput=e=>{
- const k=e.target.value.toLowerCase().trim();
- if(!k){hasilGrup.innerHTML="";return;}
- const out=[...new Set(DATA.filter(x=>x.grup.toLowerCase().includes(k)).map(x=>x.produk))];
- tags(hasilGrup,out);
-}
+
+// Handler interaksi input Produk
+const inputProduk = document.getElementById("produk");
+const suggestProduk = document.getElementById("suggestProduk");
+const hasilProduk = document.getElementById("hasilProduk");
+const btnClearProduk = document.getElementById("clearProduk");
+
+// Event input pengetikan produk
+inputProduk.oninput = e => {
+ const k = e.target.value.toLowerCase().trim();
+ if (!k) {
+   suggestProduk.style.display = "none";
+   btnClearProduk.style.display = "none";
+   hasilProduk.innerHTML = `<div class="empty-state">✨ Menunggumu memilih produk...</div>`;
+   return;
+ }
+ 
+ btnClearProduk.style.display = "flex";
+ 
+ const matchingProducts = [...new Set(DATA
+   .filter(x => x.produk && x.produk.toLowerCase().includes(k))
+   .map(x => x.produk)
+ )].slice(0, 10);
+
+ if (matchingProducts.length === 0) {
+   suggestProduk.innerHTML = `<div class="suggestion-item" style="color:rgba(255,255,255,0.3); cursor:default;">Produk tidak ditemukan</div>`;
+   suggestProduk.style.display = "block";
+   return;
+ }
+
+ suggestProduk.innerHTML = "";
+ matchingProducts.forEach(prod => {
+   const div = document.createElement("div");
+   div.className = "suggestion-item";
+   div.textContent = prod;
+   div.onclick = () => {
+     inputProduk.value = prod;
+     suggestProduk.style.display = "none";
+     const groupResults = [...new Set(DATA.filter(x => x.produk === prod).map(x => x.grup))];
+     tags(hasilProduk, groupResults);
+   };
+   suggestProduk.appendChild(div);
+ });
+ suggestProduk.style.display = "block";
+};
+
+// Fungsi tombol Clear untuk input Produk
+btnClearProduk.onclick = () => {
+ inputProduk.value = "";
+ btnClearProduk.style.display = "none";
+ suggestProduk.style.display = "none";
+ hasilProduk.innerHTML = `<div class="empty-state">✨ Menunggumu memilih produk...</div>`;
+};
+
+// Handler interaksi input Grup
+const inputGrup = document.getElementById("grup");
+const suggestGrup = document.getElementById("suggestGrup");
+const hasilGrup = document.getElementById("hasilGrup");
+const btnClearGrup = document.getElementById("clearGrup");
+
+// Event input pengetikan grup
+inputGrup.oninput = e => {
+ const k = e.target.value.toLowerCase().trim();
+ if (!k) {
+   suggestGrup.style.display = "none";
+   btnClearGrup.style.display = "none";
+   hasilGrup.innerHTML = `<div class="empty-state">✨ Menunggumu memilih grup...</div>`;
+   return;
+ }
+
+ btnClearGrup.style.display = "flex";
+
+ const matchingGroups = [...new Set(DATA
+   .filter(x => x.grup && x.grup.toLowerCase().includes(k))
+   .map(x => x.grup)
+ )].slice(0, 10);
+
+ if (matchingGroups.length === 0) {
+   suggestGrup.innerHTML = `<div class="suggestion-item" style="color:rgba(255,255,255,0.3); cursor:default;">Grup tidak ditemukan</div>`;
+   suggestGrup.style.display = "block";
+   return;
+ }
+
+ suggestGrup.innerHTML = "";
+ matchingGroups.forEach(grp => {
+   const div = document.createElement("div");
+   div.className = "suggestion-item";
+   div.textContent = grp;
+   div.onclick = () => {
+     inputGrup.value = grp;
+     suggestGrup.style.display = "none";
+     const productResults = [...new Set(DATA.filter(x => x.grup === grp).map(x => x.produk))];
+     tags(hasilGrup, productResults);
+   };
+   suggestGrup.appendChild(div);
+ });
+ suggestGrup.style.display = "block";
+};
+
+// Fungsi tombol Clear untuk input Grup
+btnClearGrup.onclick = () => {
+ inputGrup.value = "";
+ btnClearGrup.style.display = "none";
+ suggestGrup.style.display = "none";
+ hasilGrup.innerHTML = `<div class="empty-state">✨ Menunggumu memilih grup...</div>`;
+};
+
+// Menutup daftar rekomendasi jika pengguna mengetuk di luar area input/dropdown
+document.addEventListener("click", e => {
+ if (e.target !== inputProduk && e.target !== suggestProduk && e.target !== btnClearProduk) {
+   suggestProduk.style.display = "none";
+ }
+ if (e.target !== inputGrup && e.target !== suggestGrup && e.target !== btnClearGrup) {
+   suggestGrup.style.display = "none";
+ }
+});
+
 loadData();
 </script>
 </body>
